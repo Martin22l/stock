@@ -2,7 +2,59 @@
     <!-- Session Status -->
     <x-auth-session-status class="mb-4" :status="session('status')" />
 
-    <form method="POST" action="{{ route('login') }}">
+    <form method="POST" action="{{ route('login') }}" class="box">
+
+        @csrf
+
+        <!-- Email Address -->
+        <div class="field">
+            <x-input-label for="email" :value="__('Email')" />
+            <x-text-input id="email" type="email" name="email" :value="old('email')" required autofocus autocomplete="username" />
+            <x-input-error :messages="$errors->get('email')" class="" />
+        </div>
+
+        <!-- Password -->
+        <div class="field">
+            <x-input-label for="password" :value="__('Password')" />
+
+            <x-text-input id="password" class=""
+                            type="password"
+                            name="password"
+                            required autocomplete="current-password" />
+
+            <x-input-error :messages="$errors->get('password')" class="" />
+        </div>
+
+        <!-- Remember Me -->
+        <div class="field">
+            <label for="remember_me" class="checkbox">
+                <input id="remember_me" type="checkbox" class="" name="remember">
+                Remember me
+            </label>
+        </div>
+
+        <div class="field is-grouped">
+            <div class="control">
+
+                @if (Route::has('password.request'))
+                    <a class="" href="{{ route('password.request') }}">
+                        {{ __('Forgot your password?') }}
+                    </a>
+                @endif
+            </div>
+            <div class="control">
+
+                <x-primary-button class="">
+                    {{ __('Log in') }}
+                </x-primary-button>
+            </div>
+        </div>
+
+        
+      </form>
+
+
+    {{-- <form method="POST" action="{{ route('login') }}">
         @csrf
 
         <!-- Email Address -->
@@ -43,5 +95,5 @@
                 {{ __('Log in') }}
             </x-primary-button>
         </div>
-    </form>
+    </form> --}}
 </x-guest-layout>

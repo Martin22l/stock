@@ -20,7 +20,9 @@ class RegisteredUserController extends Controller
      */
     public function create(): View
     {
-        return view('auth.register');
+        $tipos_facturas = [ 'A' , 'B', 'C' ];
+
+        return view('auth.register',compact('tipos_facturas'));
     }
 
     /**
@@ -39,7 +41,7 @@ class RegisteredUserController extends Controller
             'direccion' => [ 'string', 'max:255'],
             'telefono' => ['string', 'max:255'],
             'cuit' => ['string', 'max:255'],
-            'tipo_factura' => [Rule::in($tipos_facturas)],
+            //'tipo_factura' => [Rule::in($tipos_facturas)],
         ]);
 
 
